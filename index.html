@@ -1,193 +1,190 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Adixloop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Adixloop PRO</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html,body{
-  width:100%;
-  height:100%;
-  background:#000;
-  color:#fff;
-  font-family:Arial,sans-serif;
-  overflow:hidden;
+    width:100%;
+    height:100%;
+    background:#000;
+    color:#fff;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
 }
 
 .app{
-  width:100%;
-  height:100vh;
-  max-width:520px;
-  margin:auto;
-  position:relative;
-  background:#000;
+    width:100%;
+    height:100vh;
+    max-width:520px;
+    margin:auto;
+    position:relative;
+    background:#000;
 }
 
 .feed{
-  width:100%;
-  height:100%;
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
+    width:100%;
+    height:100%;
+    overflow-y:auto;
+    scroll-snap-type:y mandatory;
 }
 
 .post{
-  width:100%;
-  height:100vh;
-  position:relative;
-  scroll-snap-align:start;
-  overflow:hidden;
-  background:#111;
+    width:100%;
+    height:100vh;
+    min-height:100vh;
+    position:relative;
+    scroll-snap-align:start;
+    overflow:hidden;
+    background:#111;
 }
 
 .media{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    background:#222;
 }
 
 .shade{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    transparent 35%,
-    rgba(0,0,0,.85)
-  );
-  pointer-events:none;
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.45),
+            transparent 35%,
+            transparent 55%,
+            rgba(0,0,0,.82)
+        );
+    pointer-events:none;
 }
 
+/* TOP */
 .logo{
-  position:absolute;
-  top:18px;
-  left:0;
-  right:0;
-  text-align:center;
-  z-index:5;
-  font-size:22px;
-  font-weight:800;
+    position:absolute;
+    top:28px;
+    left:0;
+    right:0;
+    text-align:center;
+    z-index:5;
+    font-size:28px;
+    font-weight:800;
 }
 
 .pro{
-  font-size:10px;
-  background:#fff;
-  color:#000;
-  padding:3px 5px;
-  border-radius:4px;
+    display:inline-block;
+    margin-left:6px;
+    padding:4px 7px;
+    border-radius:6px;
+    background:#fff;
+    color:#000;
+    font-size:13px;
+    vertical-align:middle;
 }
 
+/* RIGHT ACTIONS */
 .actions{
-  position:absolute;
-  right:12px;
-  bottom:105px;
-  z-index:5;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  align-items:center;
+    position:absolute;
+    right:12px;
+    bottom:105px;
+    z-index:10;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
 }
 
 .action{
-  text-align:center;
-  font-size:12px;
+    border:0;
+    width:58px;
+    min-height:58px;
+    border-radius:50%;
+    background:rgba(0,0,0,.55);
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    backdrop-filter:blur(5px);
 }
 
-.action button{
-  width:50px;
-  height:50px;
-  border:0;
-  border-radius:50%;
-  background:rgba(0,0,0,.5);
-  color:#fff;
-  font-size:22px;
+.icon{
+    font-size:29px;
+    line-height:30px;
 }
 
-.action button:active{
-  transform:scale(.88);
+.count{
+    font-size:14px;
+    margin-top:3px;
 }
 
-.action span{
-  display:block;
-  margin-top:4px;
+.action:active{
+    transform:scale(.92);
 }
 
+/* BOTTOM INFO */
 .info{
-  position:absolute;
-  left:15px;
-  right:80px;
-  bottom:82px;
-  z-index:5;
+    position:absolute;
+    left:18px;
+    right:90px;
+    bottom:24px;
+    z-index:8;
 }
 
 .username{
-  font-size:17px;
-  font-weight:bold;
-  margin-bottom:8px;
+    font-size:20px;
+    font-weight:800;
+    margin-bottom:12px;
 }
 
 .caption{
-  font-size:14px;
-  line-height:20px;
+    font-size:17px;
+    line-height:1.45;
 }
 
-.nav{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:65px;
-  z-index:20;
-  background:rgba(0,0,0,.9);
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
+.meta{
+    margin-top:7px;
+    font-size:14px;
+    opacity:.8;
 }
 
-.nav-item{
-  color:#aaa;
-  text-align:center;
-  font-size:11px;
-}
-
-.nav-item b{
-  display:block;
-  font-size:21px;
-  margin-bottom:3px;
-  color:#fff;
-}
-
-.add{
-  width:52px;
-  height:36px;
-  border-radius:9px;
-  background:#fff;
-  color:#000!important;
-  font-size:28px!important;
-  line-height:34px;
-}
-
-#upload{
-  display:none;
-}
-
+/* TOAST */
 .toast{
-  position:fixed;
-  left:50%;
-  bottom:85px;
-  transform:translateX(-50%);
-  background:#fff;
-  color:#000;
-  padding:12px 18px;
-  border-radius:25px;
-  display:none;
-  z-index:100;
-  font-size:13px;
-  white-space:nowrap;
+    position:absolute;
+    left:50%;
+    bottom:45%;
+    transform:translate(-50%,-50%);
+    z-index:100;
+    background:rgba(20,20,20,.92);
+    padding:12px 18px;
+    border-radius:25px;
+    font-size:15px;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+}
+
+/* MOBILE */
+@media(max-width:520px){
+    .post{
+        height:100vh;
+    }
 }
 </style>
 </head>
@@ -196,712 +193,213 @@ html,body{
 
 <div class="app">
 
-<main class="feed" id="feed">
+    <main class="feed">
 
-<section class="post">
+        <section class="post">
 
-<img
-class="media"
-src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
-alt="Adixloop"
->
+            <video
+                class="media"
+                src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                autoplay
+                muted
+                loop
+                playsinline>
+            </video>
 
-<div class="shade"></div>
+            <div class="shade"></div>
 
-<div class="logo">
-Adixloop
-<span class="pro">PRO</span>
-</div>
+            <div class="logo">
+                Adixloop <span class="pro">PRO</span>
+            </div>
 
-<div class="actions">
+            <div class="actions">
 
-<div class="action">
-<button onclick="like(this)">❤️</button>
-<span>0</span>
-</div>
+                <button class="action" onclick="toggleLike()">
+                    <span class="icon" id="likeIcon">♡</span>
+                    <span class="count" id="likeCount">0</span>
+                </button>
 
-<div class="action">
-<button onclick="comment(this)">💬</button>
-<span>0</span>
-</div>
+                <button class="action" onclick="openComment()">
+                    <span class="icon">💬</span>
+                    <span class="count" id="commentCount">0</span>
+                </button>
 
-<div class="action">
-<button onclick="sharePost()">↗️</button>
-<span>Share</span>
-</div>
+                <button class="action" onclick="sharePost()">
+                    <span class="icon">↗</span>
+                    <span class="count">Share</span>
+                </button>
 
-<div class="action">
-<button onclick="savePost(this)">🔖</button>
-<span>Save</span>
-</div>
+                <button class="action" onclick="toggleSave()">
+                    <span class="icon" id="saveIcon">🔖</span>
+                    <span class="count" id="saveText">Save</span>
+                </button>
 
-</div>
+            </div>
 
-<div class="info">
+            <div class="info">
+                <div class="username">@adixloop</div>
 
-<div class="username">
-@adixloop
-</div>
+                <div class="caption">
+                    Welcome to Adixloop 🚀<br>
+                    Create • Share • Discover
+                </div>
 
-<div class="caption">
-Welcome to Adixloop 🚀
-<br>
-Create • Share • Discover
-</div>
+                <div class="meta">
+                    Frontend Demo
+                </div>
+            </div>
 
-</div>
+        </section>
 
-</section>
+    </main>
 
-</main>
-
-<nav class="nav">
-
-<div class="nav-item">
-<b>🏠</b>
-Home
-</div>
-
-<div class="nav-item">
-<b>🔍</b>
-Discover
-</div>
-
-<label class="nav-item" for="upload">
-<b class="add">＋</b>
-</label>
-
-<div class="nav-item">
-<b>🔔</b>
-Activity
-</div>
-
-<div class="nav-item">
-<b>👤</b>
-Profile
-</div>
-
-</nav>
-
-<input
-id="upload"
-type="file"
-accept="image/*,video/*"
-onchange="addPost(event)"
->
+    <div class="toast" id="toast"></div>
 
 </div>
-
-<div class="toast" id="toast"></div>
 
 <script>
 
-function showToast(message){
+/* =========================
+   LOCAL DEMO STATE
+========================= */
 
-const toast=document.getElementById("toast");
-
-toast.innerText=message;
-toast.style.display="block";
-
-clearTimeout(window.toastTimer);
-
-window.toastTimer=setTimeout(()=>{
-toast.style.display="none";
-},2000);
-
-}
+let liked = false;
+let saved = false;
+let likes = 0;
+let comments = 0;
 
 
-function like(button){
+/* =========================
+   LIKE
+========================= */
 
-const count=button.parentElement.querySelector("span");
+function toggleLike(){
 
-let number=Number(count.innerText);
+    liked = !liked;
 
-if(button.dataset.liked==="yes"){
+    if(liked){
+        likes = 1;
+        document.getElementById("likeIcon").textContent = "♥";
+    }else{
+        likes = 0;
+        document.getElementById("likeIcon").textContent = "♡";
+    }
 
-button.dataset.liked="no";
-count.innerText=Math.max(0,number-1);
+    document.getElementById("likeCount").textContent = likes;
 
-}else{
-
-button.dataset.liked="yes";
-count.innerText=number+1;
-
-}
+    showToast(liked ? "Liked ❤️" : "Like removed");
 
 }
 
 
-function comment(button){
+/* =========================
+   COMMENT
+========================= */
 
-const count=button.parentElement.querySelector("span");
+function openComment(){
 
-count.innerText=Number(count.innerText)+1;
+    const text = prompt("Write your comment:");
 
-showToast("Comment added 💬");
+    if(text && text.trim()){
 
-}
+        comments++;
 
+        document.getElementById("commentCount").textContent = comments;
 
-function savePost(button){
+        showToast("Comment added 💬");
 
-if(button.innerText==="🔖"){
-
-button.innerText="✅";
-showToast("Saved ✓");
-
-}else{
-
-button.innerText="🔖";
-showToast("Removed from saved");
+    }
 
 }
 
-}
 
+/* =========================
+   SHARE
+========================= */
 
 async function sharePost(){
 
-if(navigator.share){
+    const shareData = {
+        title:"Adixloop PRO",
+        text:"Check this post on Adixloop!",
+        url:window.location.href
+    };
 
-try{
+    try{
 
-await navigator.share({
-title:"Adixloop",
-text:"Check this post on Adixloop"
-});
+        if(navigator.share){
 
-}catch(error){}
+            await navigator.share(shareData);
 
-}else{
+        }else{
 
-showToast("Share उपलब्ध नहीं है");
+            await navigator.clipboard.writeText(window.location.href);
 
-}
+            showToast("Link copied 🔗");
 
-}
+        }
 
+    }catch(error){
 
-function addPost(event){
+        console.log("Share cancelled");
 
-const file=event.target.files[0];
-
-if(!file)return;
-
-if(file.size>50*1024*1024){
-
-showToast("Maximum 50 MB allowed");
-
-event.target.value="";
-
-return;
+    }
 
 }
 
-const url=URL.createObjectURL(file);
 
-const post=document.createElement("section");
+/* =========================
+   SAVE
+========================= */
 
-post.className="post";
+function toggleSave(){
 
-let media;
+    saved = !saved;
 
-if(file.type.startsWith("video/")){
+    const icon = document.getElementById("saveIcon");
+    const text = document.getElementById("saveText");
 
-media=document.createElement("video");
+    if(saved){
 
-media.autoplay=true;
-media.loop=true;
-media.muted=true;
-media.playsInline=true;
+        icon.textContent = "🔖";
+        text.textContent = "Saved";
 
-}else{
+        showToast("Post saved 🔖");
 
-media=document.createElement("img");
+    }else{
+
+        icon.textContent = "🔖";
+        text.textContent = "Save";
+
+        showToast("Removed from saves");
+
+    }
 
 }
 
-media.className="media";
-media.src=url;
 
-post.innerHTML=`
-
-<div class="shade"></div>
-
-<div class="logo">
-Adixloop
-<span class="pro">PRO</span>
-</div>
-
-<div class="actions">
-
-<div class="action">
-<button onclick="like(this)">❤️</button>
-<span>0</span>
-</div>
-
-<div class="action">
-<button onclick="comment(this)">💬</button>
-<span>0</span>
-</div>
-
-<div class="action">
-<button onclick="sharePost()">↗️</button>
-<span>Share</span>
-</div>
-
-<div class="action"><!DOCTYPE html>
-<html lang="hi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Adixloop</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html,body{
-  width:100%;
-  height:100%;
-  background:#000;
-  color:#fff;
-  font-family:Arial,sans-serif;
-  overflow:hidden;
-}
-
-.app{
-  width:100%;
-  height:100vh;
-  max-width:520px;
-  margin:auto;
-  position:relative;
-  background:#000;
-}
-
-.feed{
-  width:100%;
-  height:100%;
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-}
-
-.post{
-  width:100%;
-  height:100vh;
-  position:relative;
-  scroll-snap-align:start;
-  overflow:hidden;
-  background:#111;
-}
-
-.media{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.shade{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    transparent 35%,
-    rgba(0,0,0,.85)
-  );
-  pointer-events:none;
-}
-
-.logo{
-  position:absolute;
-  top:18px;
-  left:0;
-  right:0;
-  text-align:center;
-  z-index:5;
-  font-size:22px;
-  font-weight:800;
-}
-
-.pro{
-  font-size:10px;
-  background:#fff;
-  color:#000;
-  padding:3px 5px;
-  border-radius:4px;
-}
-
-.actions{
-  position:absolute;
-  right:12px;
-  bottom:105px;
-  z-index:5;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  align-items:center;
-}
-
-.action{
-  text-align:center;
-  font-size:12px;
-}
-
-.action button{
-  width:50px;
-  height:50px;
-  border:0;
-  border-radius:50%;
-  background:rgba(0,0,0,.5);
-  color:#fff;
-  font-size:22px;
-}
-
-.action button:active{
-  transform:scale(.88);
-}
-
-.action span{
-  display:block;
-  margin-top:4px;
-}
-
-.info{
-  position:absolute;
-  left:15px;
-  right:80px;
-  bottom:82px;
-  z-index:5;
-}
-
-.username{
-  font-size:17px;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-.caption{
-  font-size:14px;
-  line-height:20px;
-}
-
-.nav{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:65px;
-  z-index:20;
-  background:rgba(0,0,0,.9);
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-}
-
-.nav-item{
-  color:#aaa;
-  text-align:center;
-  font-size:11px;
-}
-
-.nav-item b{
-  display:block;
-  font-size:21px;
-  margin-bottom:3px;
-  color:#fff;
-}
-
-.add{
-  width:52px;
-  height:36px;
-  border-radius:9px;
-  background:#fff;
-  color:#000!important;
-  font-size:28px!important;
-  line-height:34px;
-}
-
-#upload{
-  display:none;
-}
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:85px;
-  transform:translateX(-50%);
-  background:#fff;
-  color:#000;
-  padding:12px 18px;
-  border-radius:25px;
-  display:none;
-  z-index:100;
-  font-size:13px;
-  white-space:nowrap;
-}
-</style>
-</head>
-
-<body>
-
-<div class="app">
-
-<main class="feed" id="feed">
-
-<section class="post">
-
-<img
-class="media"
-src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
-alt="Adixloop"
->
-
-<div class="shade"></div>
-
-<div class="logo">
-Adixloop
-<span class="pro">PRO</span>
-</div>
-
-<div class="actions">
-
-<div class="action">
-<button onclick="like(this)">❤️</button>
-<span>0</span>
-</div>
-
-<div class="action">
-<button onclick="comment(this)">💬</button>
-<span>0</span>
-</div>
-
-<div class="action">
-<button onclick="sharePost()">↗️</button>
-<span>Share</span>
-</div>
-
-<div class="action">
-<button onclick="savePost(this)">🔖</button>
-<span>Save</span>
-</div>
-
-</div>
-
-<div class="info">
-
-<div class="username">
-@adixloop
-</div>
-
-<div class="caption">
-Welcome to Adixloop 🚀
-<br>
-Create • Share • Discover
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-<nav class="nav">
-
-<div class="nav-item">
-<b>🏠</b>
-Home
-</div>
-
-<div class="nav-item">
-<b>🔍</b>
-Discover
-</div>
-
-<label class="nav-item" for="upload">
-<b class="add">＋</b>
-</label>
-
-<div class="nav-item">
-<b>🔔</b>
-Activity
-</div>
-
-<div class="nav-item">
-<b>👤</b>
-Profile
-</div>
-
-</nav>
-
-<input
-id="upload"
-type="file"
-accept="image/*,video/*"
-onchange="addPost(event)"
->
-
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
+/* =========================
+   TOAST
+========================= */
 
 function showToast(message){
 
-const toast=document.getElementById("toast");
+    const toast = document.getElementById("toast");
 
-toast.innerText=message;
-toast.style.display="block";
+    toast.textContent = message;
+    toast.classList.add("show");
 
-clearTimeout(window.toastTimer);
+    clearTimeout(window.toastTimer);
 
-window.toastTimer=setTimeout(()=>{
-toast.style.display="none";
-},2000);
+    window.toastTimer = setTimeout(function(){
 
-}
+        toast.classList.remove("show");
 
-
-function like(button){
-
-const count=button.parentElement.querySelector("span");
-
-let number=Number(count.innerText);
-
-if(button.dataset.liked==="yes"){
-
-button.dataset.liked="no";
-count.innerText=Math.max(0,number-1);
-
-}else{
-
-button.dataset.liked="yes";
-count.innerText=number+1;
+    },1800);
 
 }
 
-}
+</script>
 
-
-function comment(button){
-
-const count=button.parentElement.querySelector("span");
-
-count.innerText=Number(count.innerText)+1;
-
-showToast("Comment added 💬");
-
-}
-
-
-function savePost(button){
-
-if(button.innerText==="🔖"){
-
-button.innerText="✅";
-showToast("Saved ✓");
-
-}else{
-
-button.innerText="🔖";
-showToast("Removed from saved");
-
-}
-
-}
-
-
-async function sharePost(){
-
-if(navigator.share){
-
-try{
-
-await navigator.share({
-title:"Adixloop",
-text:"Check this post on Adixloop"
-});
-
-}catch(error){}
-
-}else{
-
-showToast("Share उपलब्ध नहीं है");
-
-}
-
-}
-
-
-function addPost(event){
-
-const file=event.target.files[0];
-
-if(!file)return;
-
-if(file.size>50*1024*1024){
-
-showToast("Maximum 50 MB allowed");
-
-event.target.value="";
-
-return;
-
-}
-
-const url=URL.createObjectURL(file);
-
-const post=document.createElement("section");
-
-post.className="post";
-
-let media;
-
-if(file.type.startsWith("video/")){
-
-media=document.createElement("video");
-
-media.autoplay=true;
-media.loop=true;
-media.muted=true;
-media.playsInline=true;
-
-}else{
-
-media=document.createElement("img");
-
-}
-
-media.className="media";
-media.src=url;
-
-post.innerHTML=`
-
-<div class="shade"></div>
-
-<div class="logo">
-Adixloop
-<span class="pro">PRO</span>
-</div>
-
-<div class="actions">
-
-<div class="action">
-<button onclick="like(this)">❤️</button>
-<span>0</span>
-</div>
-
-<div class="action">
-<button onclick="comment(this)">💬</button>
-<span>0</span>
-</div>
-
-<div class="action">
-<button onclick="sharePost()">↗️</button>
-<span>Share</span>
-</div>
-
-<div class="action">
+</body>
+</html>
